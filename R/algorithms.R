@@ -44,6 +44,7 @@ generatePermutations <- function(n, K){
 #' @param Y response vector
 #' @param K number of permutations
 #' @return p-values for RPT and RPT_em
+#' @example example/example.R
 #' @export
 ResidualPermutationTest <- function(X, Y, K=99){
   Z <- X[, 1]; X <- X[, -1]
