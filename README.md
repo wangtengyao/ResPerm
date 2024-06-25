@@ -1,0 +1,1 @@
+This package implements the residual permutation test of arxiv.org/abs/2211.16182
