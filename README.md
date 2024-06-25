@@ -1,5 +1,3 @@
-This package implements the residual permutation test of arxiv.org/abs/2211.16182
-
 # ResPerm: A package for single coefficient testing in linear model using residual permutation test
 ## Description
 The ResPerm `R` package provides the function `ResidualPermutationTest` that tests whether the first regression coefficient in Y ~ X is zero. 
