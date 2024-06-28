@@ -58,15 +58,15 @@ ResidualPermutationTest <- function(X, Y, K=99){
     
     # compute projection of Z onto the complement of column space of (X, X[idx,])
     Vz <- tryCatch({
-      lm.fit(Z, cbind(X,X[idx,]))$residuals
-      }, error=function(e){"error"}) 
+     Vz<- lm.fit(cbind(X,X[idx,]), Z)$residuals
+    }, error=function(e){"error"}) 
     
     # use svd if (X, X[idx,]) is singular
     if(identical(Vz, "error")){
       tmp <- svd(cbind(X, X[idx,]), nu=2*p)$u
       Vz <- Z - tmp %*% (t(tmp) %*% Z)
     }
-    
+
     # compute inner product of Z with Y and Y[idx] on the orthogonal space of (X, X[idx,])
     stat1[r] <- as.numeric(sum(Vz * Y))
     stat2[r] <- as.numeric(sum(Vz * Y[idx]))
