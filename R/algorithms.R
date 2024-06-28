@@ -56,19 +56,16 @@ ResidualPermutationTest <- function(X, Y, K=99){
   for (r in 1:K){
     idx <- perm_ind[r, ]  # idx represents the associated permutation index of P_r
     
-    # compute projection matrix to the complement of column space of (X, X[idx,])
-    VtildeVtilde <- tryCatch({
-      tmp <- cbind(X, X[idx,]); 
-      diag(n) - tmp %*% solve(t(tmp) %*% tmp, t(tmp))
+    # compute projection of Z onto the complement of column space of (X, X[idx,])
+    Vz <- tryCatch({
+      lm.fit(Z, cbind(X,X[idx,]))$residuals
       }, error=function(e){"error"}) 
     
-    if(identical(VtildeVtilde, "error")){
-      #there may be overlap between spaces of X and X[idx, ] or X may not be full rank
+    # use svd if (X, X[idx,]) is singular
+    if(identical(Vz, "error")){
       tmp <- svd(cbind(X, X[idx,]), nu=2*p)$u
-      VtildeVtilde <- diag(n) - tmp %*% t(tmp)
+      Vz <- Z - tmp %*% (t(tmp) %*% Z)
     }
-    
-    Vz <- as.vector(VtildeVtilde %*% Z) # project Z to orthogonal space of (X, X[idx,])
     
     # compute inner product of Z with Y and Y[idx] on the orthogonal space of (X, X[idx,])
     stat1[r] <- as.numeric(sum(Vz * Y))
