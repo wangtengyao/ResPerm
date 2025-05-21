@@ -9,4 +9,4 @@ install_github('wangtengyao/ResPerm')
 ```
 
 ## References
-Wen, K., Wang, T. and Wang, Y. (2025) Residual permutation test for high-dimensional regression coefficient testing. _Ann. Statist._, __53__, 724–748. 
+Wen, K., Wang, T. and Wang, Y. (2025) Residual permutation test for regression coefficient testing. _Ann. Statist._, __53__, 724–748. 
